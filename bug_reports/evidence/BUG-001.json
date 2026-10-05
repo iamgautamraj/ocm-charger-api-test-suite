@@ -1,0 +1,390 @@
+[
+  {
+    "DataProvider": {
+      "WebsiteURL": "https://nordocpi.viaaq.eu",
+      "Comments": "OCPI with Data Sharing Agreement",
+      "DataProviderStatusType": {
+        "IsProviderEnabled": true,
+        "ID": 20,
+        "Title": "Automated Import"
+      },
+      "IsRestrictedEdit": true,
+      "IsOpenDataLicensed": true,
+      "IsApprovedImport": true,
+      "License": "CC0",
+      "DateLastImported": "2026-10-05T04:17:14.267Z",
+      "ID": 53,
+      "Title": "NordOCPI"
+    },
+    "OperatorInfo": null,
+    "UsageType": {
+      "IsPayAtLocation": false,
+      "IsMembershipRequired": true,
+      "IsAccessKeyRequired": true,
+      "ID": 4,
+      "Title": "Public - Membership Required"
+    },
+    "StatusType": {
+      "IsOperational": true,
+      "IsUserSelectable": true,
+      "ID": 50,
+      "Title": "Operational"
+    },
+    "SubmissionStatus": {
+      "IsLive": true,
+      "ID": 200,
+      "Title": "Submission Published"
+    },
+    "UserComments": null,
+    "PercentageSimilarity": null,
+    "MediaItems": null,
+    "IsRecentlyVerified": true,
+    "DateLastVerified": "2026-10-05T04:17:00Z",
+    "ID": 511165,
+    "UUID": "6B125300-1E13-44A0-831F-65B08FFBE0DD",
+    "ParentChargePointID": null,
+    "DataProviderID": 53,
+    "DataProvidersReference": "51647790-2d87-4e22-80d6-69a37fbe7884",
+    "OperatorID": null,
+    "OperatorsReference": null,
+    "UsageTypeID": 4,
+    "UsageCost": null,
+    "AddressInfo": {
+      "ID": 511554,
+      "Title": "Ionity Ionity Pudasj\u00E4rvi",
+      "AddressLine1": "S\u00E4hk\u00F6tie 1",
+      "AddressLine2": null,
+      "Town": "Pudasj\u00E4rvi",
+      "StateOrProvince": null,
+      "Postcode": "93100",
+      "CountryID": 79,
+      "Country": {
+        "ISOCode": "FI",
+        "ContinentCode": "EU",
+        "ID": 79,
+        "Title": "Finland"
+      },
+      "Latitude": 65.360582,
+      "Longitude": 26.986816,
+      "ContactTelephone1": null,
+      "ContactTelephone2": null,
+      "ContactEmail": null,
+      "AccessComments": null,
+      "RelatedURL": null,
+      "Distance": null,
+      "DistanceUnit": 0
+    },
+    "Connections": [
+      {
+        "ID": 880690,
+        "ConnectionTypeID": 33,
+        "ConnectionType": {
+          "FormalName": "IEC 62196-3 Configuration FF",
+          "IsDiscontinued": false,
+          "IsObsolete": false,
+          "ID": 33,
+          "Title": "CCS (Type 2)"
+        },
+        "Reference": null,
+        "StatusTypeID": 50,
+        "StatusType": {
+          "IsOperational": true,
+          "IsUserSelectable": true,
+          "ID": 50,
+          "Title": "Operational"
+        },
+        "LevelID": 3,
+        "Level": {
+          "Comments": "40KW and Higher",
+          "IsFastChargeCapable": true,
+          "ID": 3,
+          "Title": "Level 3:  High (Over 40kW)"
+        },
+        "Amps": 400,
+        "Voltage": 500,
+        "PowerKW": 200,
+        "CurrentTypeID": 30,
+        "CurrentType": {
+          "Description": "Direct Current",
+          "ID": 30,
+          "Title": "DC"
+        },
+        "Quantity": 1,
+        "Comments": null
+      }
+    ],
+    "NumberOfPoints": null,
+    "GeneralComments": null,
+    "DatePlanned": null,
+    "DateLastConfirmed": null,
+    "StatusTypeID": 50,
+    "DateLastStatusUpdate": "2026-10-05T04:17:00Z",
+    "MetadataValues": null,
+    "DataQualityLevel": 1,
+    "DateCreated": "2026-10-05T04:17:00Z",
+    "SubmissionStatusTypeID": 200
+  },
+  {
+    "DataProvider": {
+      "WebsiteURL": "https://nordocpi.viaaq.eu",
+      "Comments": "OCPI with Data Sharing Agreement",
+      "DataProviderStatusType": {
+        "IsProviderEnabled": true,
+        "ID": 20,
+        "Title": "Automated Import"
+      },
+      "IsRestrictedEdit": true,
+      "IsOpenDataLicensed": true,
+      "IsApprovedImport": true,
+      "License": "CC0",
+      "DateLastImported": "2026-10-05T04:17:14.267Z",
+      "ID": 53,
+      "Title": "NordOCPI"
+    },
+    "OperatorInfo": null,
+    "UsageType": {
+      "IsPayAtLocation": false,
+      "IsMembershipRequired": true,
+      "IsAccessKeyRequired": true,
+      "ID": 4,
+      "Title": "Public - Membership Required"
+    },
+    "StatusType": {
+      "IsOperational": true,
+      "IsUserSelectable": true,
+      "ID": 50,
+      "Title": "Operational"
+    },
+    "SubmissionStatus": {
+      "IsLive": true,
+      "ID": 200,
+      "Title": "Submission Published"
+    },
+    "UserComments": null,
+    "PercentageSimilarity": null,
+    "MediaItems": null,
+    "IsRecentlyVerified": true,
+    "DateLastVerified": "2026-10-05T04:17:00Z",
+    "ID": 511164,
+    "UUID": "2C7DD457-084E-4DF2-83A7-099DB5EF0B48",
+    "ParentChargePointID": null,
+    "DataProviderID": 53,
+    "DataProvidersReference": "e053ec4d-de5d-409d-83ca-6f2c07f6ed9f",
+    "OperatorID": null,
+    "OperatorsReference": null,
+    "UsageTypeID": 4,
+    "UsageCost": null,
+    "AddressInfo": {
+      "ID": 511553,
+      "Title": "Virta Kauppakeskus Kaakkurinkulma",
+      "AddressLine1": "Kaakkurinkulma 4",
+      "AddressLine2": null,
+      "Town": "Oulu",
+      "StateOrProvince": null,
+      "Postcode": "90410",
+      "CountryID": 79,
+      "Country": {
+        "ISOCode": "FI",
+        "ContinentCode": "EU",
+        "ID": 79,
+        "Title": "Finland"
+      },
+      "Latitude": 64.9621964,
+      "Longitude": 25.5195007,
+      "ContactTelephone1": null,
+      "ContactTelephone2": null,
+      "ContactEmail": null,
+      "AccessComments": null,
+      "RelatedURL": null,
+      "Distance": null,
+      "DistanceUnit": 0
+    },
+    "Connections": [
+      {
+        "ID": 880689,
+        "ConnectionTypeID": 25,
+        "ConnectionType": {
+          "FormalName": "IEC 62196-2 Type 2",
+          "IsDiscontinued": false,
+          "IsObsolete": false,
+          "ID": 25,
+          "Title": "Type 2 (Socket Only)"
+        },
+        "Reference": null,
+        "StatusTypeID": 50,
+        "StatusType": {
+          "IsOperational": true,
+          "IsUserSelectable": true,
+          "ID": 50,
+          "Title": "Operational"
+        },
+        "LevelID": 2,
+        "Level": {
+          "Comments": "Over 2 kW, usually non-domestic socket type",
+          "IsFastChargeCapable": false,
+          "ID": 2,
+          "Title": "Level 2 : Medium (Over 2kW)"
+        },
+        "Amps": 32,
+        "Voltage": 400,
+        "PowerKW": 22,
+        "CurrentTypeID": 20,
+        "CurrentType": {
+          "Description": "Alternating Current - Three Phase",
+          "ID": 20,
+          "Title": "AC (Three-Phase)"
+        },
+        "Quantity": 1,
+        "Comments": null
+      }
+    ],
+    "NumberOfPoints": null,
+    "GeneralComments": null,
+    "DatePlanned": null,
+    "DateLastConfirmed": null,
+    "StatusTypeID": 50,
+    "DateLastStatusUpdate": "2026-10-05T04:17:00Z",
+    "MetadataValues": null,
+    "DataQualityLevel": 1,
+    "DateCreated": "2026-10-05T04:17:00Z",
+    "SubmissionStatusTypeID": 200
+  },
+  {
+    "DataProvider": {
+      "WebsiteURL": "https://nordocpi.viaaq.eu",
+      "Comments": "OCPI with Data Sharing Agreement",
+      "DataProviderStatusType": {
+        "IsProviderEnabled": true,
+        "ID": 20,
+        "Title": "Automated Import"
+      },
+      "IsRestrictedEdit": true,
+      "IsOpenDataLicensed": true,
+      "IsApprovedImport": true,
+      "License": "CC0",
+      "DateLastImported": "2026-10-05T04:17:14.267Z",
+      "ID": 53,
+      "Title": "NordOCPI"
+    },
+    "OperatorInfo": {
+      "WebsiteURL": "https://www.plugitcloud.com",
+      "Comments": null,
+      "PhonePrimaryContact": null,
+      "PhoneSecondaryContact": null,
+      "IsPrivateIndividual": false,
+      "AddressInfo": null,
+      "BookingURL": null,
+      "ContactEmail": null,
+      "FaultReportEmail": null,
+      "IsRestrictedEdit": false,
+      "ID": 3353,
+      "Title": "Plugit"
+    },
+    "UsageType": {
+      "IsPayAtLocation": false,
+      "IsMembershipRequired": true,
+      "IsAccessKeyRequired": true,
+      "ID": 4,
+      "Title": "Public - Membership Required"
+    },
+    "StatusType": {
+      "IsOperational": true,
+      "IsUserSelectable": true,
+      "ID": 50,
+      "Title": "Operational"
+    },
+    "SubmissionStatus": {
+      "IsLive": true,
+      "ID": 200,
+      "Title": "Submission Published"
+    },
+    "UserComments": null,
+    "PercentageSimilarity": null,
+    "MediaItems": null,
+    "IsRecentlyVerified": true,
+    "DateLastVerified": "2026-10-05T04:17:00Z",
+    "ID": 511163,
+    "UUID": "C2A3593B-692F-4E3F-BE25-61DEA2A4792D",
+    "ParentChargePointID": null,
+    "DataProviderID": 53,
+    "DataProvidersReference": "9c77d5fc-27ff-4307-bb12-e7ea9f0b1f0d",
+    "OperatorID": 3353,
+    "OperatorsReference": null,
+    "UsageTypeID": 4,
+    "UsageCost": null,
+    "AddressInfo": {
+      "ID": 511552,
+      "Title": "Plugit Oulun Lentoasema (OUL)",
+      "AddressLine1": "Lentokent\u00E4ntie 720",
+      "AddressLine2": null,
+      "Town": "Oulu",
+      "StateOrProvince": null,
+      "Postcode": "90410",
+      "CountryID": 79,
+      "Country": {
+        "ISOCode": "FI",
+        "ContinentCode": "EU",
+        "ID": 79,
+        "Title": "Finland"
+      },
+      "Latitude": 64.930373,
+      "Longitude": 25.377133,
+      "ContactTelephone1": null,
+      "ContactTelephone2": null,
+      "ContactEmail": null,
+      "AccessComments": null,
+      "RelatedURL": null,
+      "Distance": null,
+      "DistanceUnit": 0
+    },
+    "Connections": [
+      {
+        "ID": 880688,
+        "ConnectionTypeID": 33,
+        "ConnectionType": {
+          "FormalName": "IEC 62196-3 Configuration FF",
+          "IsDiscontinued": false,
+          "IsObsolete": false,
+          "ID": 33,
+          "Title": "CCS (Type 2)"
+        },
+        "Reference": null,
+        "StatusTypeID": 50,
+        "StatusType": {
+          "IsOperational": true,
+          "IsUserSelectable": true,
+          "ID": 50,
+          "Title": "Operational"
+        },
+        "LevelID": 3,
+        "Level": {
+          "Comments": "40KW and Higher",
+          "IsFastChargeCapable": true,
+          "ID": 3,
+          "Title": "Level 3:  High (Over 40kW)"
+        },
+        "Amps": 400,
+        "Voltage": 500,
+        "PowerKW": 200,
+        "CurrentTypeID": 30,
+        "CurrentType": {
+          "Description": "Direct Current",
+          "ID": 30,
+          "Title": "DC"
+        },
+        "Quantity": 1,
+        "Comments": null
+      }
+    ],
+    "NumberOfPoints": null,
+    "GeneralComments": null,
+    "DatePlanned": null,
+    "DateLastConfirmed": null,
+    "StatusTypeID": 50,
+    "DateLastStatusUpdate": "2026-10-05T04:17:00Z",
+    "MetadataValues": null,
+    "DataQualityLevel": 1,
+    "DateCreated": "2026-10-05T04:17:00Z",
+    "SubmissionStatusTypeID": 200
+  }
+]

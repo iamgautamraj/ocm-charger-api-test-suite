@@ -1,0 +1,16 @@
+{
+  "name": "OCM Environment",
+  "values": [
+    {
+      "key": "base_url",
+      "value": "https://api.openchargemap.io",
+      "enabled": true
+    },
+    {
+      "key": "api_key",
+      "value": "",
+      "type": "secret",
+      "enabled": true
+    }
+  ]
+}

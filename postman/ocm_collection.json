@@ -1,0 +1,1063 @@
+{
+  "info": {
+    "name": "Open Charge Map API Test Suite",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "event": [
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "pm.test(\"No server error (status < 500)\", () => pm.expect(pm.response.code).to.be.below(500));",
+          "pm.test(\"Response time under 3000 ms\", () => pm.expect(pm.response.responseTime).to.be.below(3000));"
+        ]
+      }
+    }
+  ],
+  "item": [
+    {
+      "name": "Search",
+      "item": [
+        {
+          "name": "TC-01: Search chargers in India (maxresults=10)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"Response is a non-empty array\", () => {",
+                  "  pm.expect(body).to.be.an(\"array\");",
+                  "  pm.expect(body.length).to.be.above(0);",
+                  "});",
+                  "pm.test(\"Respects maxresults (<= 10)\", () => pm.expect(body.length).to.be.at.most(10));",
+                  "pm.test(\"All results are in India\", () => {",
+                  "  body.forEach(p => {",
+                  "    const c = p.AddressInfo && p.AddressInfo.Country;",
+                  "    if (c) pm.expect(c.ISOCode).to.equal(\"IN\");",
+                  "  });",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v3/poi/?output=json&countrycode=IN&maxresults=10&key={{api_key}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v3",
+                "poi",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "output",
+                  "value": "json"
+                },
+                {
+                  "key": "countrycode",
+                  "value": "IN"
+                },
+                {
+                  "key": "maxresults",
+                  "value": "10"
+                },
+                {
+                  "key": "key",
+                  "value": "{{api_key}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "TC-02: Search within 10 km of a point in Bengaluru",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"Response is a non-empty array\", () => {",
+                  "  pm.expect(body).to.be.an(\"array\");",
+                  "  pm.expect(body.length).to.be.above(0);",
+                  "});",
+                  "pm.test(\"Every result is within 10 km\", () => {",
+                  "  body.forEach(p => {",
+                  "    if (p.AddressInfo && typeof p.AddressInfo.Distance === \"number\")",
+                  "      pm.expect(p.AddressInfo.Distance).to.be.at.most(10);",
+                  "  });",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v3/poi/?output=json&latitude=12.9716&longitude=77.5946&distance=10&distanceunit=KM&maxresults=20&key={{api_key}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v3",
+                "poi",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "output",
+                  "value": "json"
+                },
+                {
+                  "key": "latitude",
+                  "value": "12.9716"
+                },
+                {
+                  "key": "longitude",
+                  "value": "77.5946"
+                },
+                {
+                  "key": "distance",
+                  "value": "10"
+                },
+                {
+                  "key": "distanceunit",
+                  "value": "KM"
+                },
+                {
+                  "key": "maxresults",
+                  "value": "20"
+                },
+                {
+                  "key": "key",
+                  "value": "{{api_key}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "TC-03: maxresults=5 is respected",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"At most 5 results\", () => pm.expect(body.length).to.be.at.most(5));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v3/poi/?output=json&countrycode=IN&maxresults=5&key={{api_key}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v3",
+                "poi",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "output",
+                  "value": "json"
+                },
+                {
+                  "key": "countrycode",
+                  "value": "IN"
+                },
+                {
+                  "key": "maxresults",
+                  "value": "5"
+                },
+                {
+                  "key": "key",
+                  "value": "{{api_key}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "TC-04: Location with no chargers (mid-ocean)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"Empty array returned\", () => {",
+                  "  pm.expect(body).to.be.an(\"array\");",
+                  "  pm.expect(body.length).to.equal(0);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v3/poi/?output=json&latitude=0&longitude=-30&distance=10&distanceunit=KM&key={{api_key}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v3",
+                "poi",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "output",
+                  "value": "json"
+                },
+                {
+                  "key": "latitude",
+                  "value": "0"
+                },
+                {
+                  "key": "longitude",
+                  "value": "-30"
+                },
+                {
+                  "key": "distance",
+                  "value": "10"
+                },
+                {
+                  "key": "distanceunit",
+                  "value": "KM"
+                },
+                {
+                  "key": "key",
+                  "value": "{{api_key}}"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Structure",
+      "item": [
+        {
+          "name": "TC-05: Required fields present in each charger record",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"Response is a non-empty array\", () => {",
+                  "  pm.expect(body).to.be.an(\"array\");",
+                  "  pm.expect(body.length).to.be.above(0);",
+                  "});",
+                  "pm.test(\"Each record has required fields\", () => {",
+                  "  body.forEach(p => {",
+                  "    pm.expect(p.ID, \"ID\").to.be.a(\"number\");",
+                  "    pm.expect(p.AddressInfo, \"AddressInfo\").to.be.an(\"object\");",
+                  "    pm.expect(p.AddressInfo.Latitude, \"Latitude\").to.be.a(\"number\");",
+                  "    pm.expect(p.AddressInfo.Longitude, \"Longitude\").to.be.a(\"number\");",
+                  "    pm.expect(p.Connections, \"Connections\").to.be.an(\"array\");",
+                  "  });",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v3/poi/?output=json&countrycode=IN&maxresults=50&key={{api_key}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v3",
+                "poi",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "output",
+                  "value": "json"
+                },
+                {
+                  "key": "countrycode",
+                  "value": "IN"
+                },
+                {
+                  "key": "maxresults",
+                  "value": "50"
+                },
+                {
+                  "key": "key",
+                  "value": "{{api_key}}"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Data quality",
+      "item": [
+        {
+          "name": "TC-06: No duplicate charger IDs in one response",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"Charger IDs are unique\", () => {",
+                  "  const ids = body.map(p => p.ID);",
+                  "  pm.expect(new Set(ids).size).to.equal(ids.length);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v3/poi/?output=json&countrycode=IN&maxresults=100&key={{api_key}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v3",
+                "poi",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "output",
+                  "value": "json"
+                },
+                {
+                  "key": "countrycode",
+                  "value": "IN"
+                },
+                {
+                  "key": "maxresults",
+                  "value": "100"
+                },
+                {
+                  "key": "key",
+                  "value": "{{api_key}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "TC-07: India results have coordinates inside India",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"Coordinates fall inside India bounding box\", () => {",
+                  "  const bad = body.filter(p => {",
+                  "    const a = p.AddressInfo;",
+                  "    return a.Latitude < 6 || a.Latitude > 38 || a.Longitude < 68 || a.Longitude > 98;",
+                  "  }).map(p => p.ID + \" (\" + p.AddressInfo.Latitude + \", \" + p.AddressInfo.Longitude + \")\");",
+                  "  pm.expect(bad, \"IDs outside India: \" + bad.join(\"; \")).to.be.empty;",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v3/poi/?output=json&countrycode=IN&maxresults=100&key={{api_key}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v3",
+                "poi",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "output",
+                  "value": "json"
+                },
+                {
+                  "key": "countrycode",
+                  "value": "IN"
+                },
+                {
+                  "key": "maxresults",
+                  "value": "100"
+                },
+                {
+                  "key": "key",
+                  "value": "{{api_key}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "TC-08: Every record has a non-empty title",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"Every record has a non-empty title\", () => {",
+                  "  body.forEach(p => pm.expect(((p.AddressInfo || {}).Title || \"\").trim().length, \"title of ID \" + p.ID).to.be.above(0));",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v3/poi/?output=json&countrycode=IN&maxresults=100&key={{api_key}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v3",
+                "poi",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "output",
+                  "value": "json"
+                },
+                {
+                  "key": "countrycode",
+                  "value": "IN"
+                },
+                {
+                  "key": "maxresults",
+                  "value": "100"
+                },
+                {
+                  "key": "key",
+                  "value": "{{api_key}}"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Filters",
+      "item": [
+        {
+          "name": "TC-09: Filter by connection type (33 = CCS, verify in reference data)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"Each charger has a connection of type 33\", () => {",
+                  "  body.forEach(p => pm.expect(p.Connections.some(c => c.ConnectionTypeID === 33), \"ID \" + p.ID).to.be.true);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v3/poi/?output=json&countrycode=IN&connectiontypeid=33&maxresults=20&key={{api_key}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v3",
+                "poi",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "output",
+                  "value": "json"
+                },
+                {
+                  "key": "countrycode",
+                  "value": "IN"
+                },
+                {
+                  "key": "connectiontypeid",
+                  "value": "33"
+                },
+                {
+                  "key": "maxresults",
+                  "value": "20"
+                },
+                {
+                  "key": "key",
+                  "value": "{{api_key}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "TC-10: Filter by status (50 = Operational, verify in reference data)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"Each charger has status 50\", () => {",
+                  "  body.forEach(p => {",
+                  "    if (p.StatusType) pm.expect(p.StatusType.ID, \"ID \" + p.ID).to.equal(50);",
+                  "  });",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v3/poi/?output=json&countrycode=IN&statustypeid=50&maxresults=20&key={{api_key}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v3",
+                "poi",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "output",
+                  "value": "json"
+                },
+                {
+                  "key": "countrycode",
+                  "value": "IN"
+                },
+                {
+                  "key": "statustypeid",
+                  "value": "50"
+                },
+                {
+                  "key": "maxresults",
+                  "value": "20"
+                },
+                {
+                  "key": "key",
+                  "value": "{{api_key}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "TC-11: Filter by level (3 = DC fast, verify in reference data)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"Each charger has a level 3 connection\", () => {",
+                  "  body.forEach(p => pm.expect(p.Connections.some(c => c.LevelID === 3), \"ID \" + p.ID).to.be.true);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v3/poi/?output=json&countrycode=IN&levelid=3&maxresults=20&key={{api_key}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v3",
+                "poi",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "output",
+                  "value": "json"
+                },
+                {
+                  "key": "countrycode",
+                  "value": "IN"
+                },
+                {
+                  "key": "levelid",
+                  "value": "3"
+                },
+                {
+                  "key": "maxresults",
+                  "value": "20"
+                },
+                {
+                  "key": "key",
+                  "value": "{{api_key}}"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reference data",
+      "item": [
+        {
+          "name": "TC-12: Reference data endpoint returns lookup lists",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"Has ConnectionTypes, StatusTypes, Countries\", () => {",
+                  "  [\"ConnectionTypes\", \"StatusTypes\", \"Countries\"].forEach(k => {",
+                  "    pm.expect(body[k], k).to.be.an(\"array\");",
+                  "    pm.expect(body[k].length, k).to.be.above(0);",
+                  "  });",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v3/referencedata/?output=json&key={{api_key}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v3",
+                "referencedata",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "output",
+                  "value": "json"
+                },
+                {
+                  "key": "key",
+                  "value": "{{api_key}}"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "TC-13: Request with no API key",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Missing key is rejected (401/403)\", () => pm.expect([401, 403]).to.include(pm.response.code));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v3/poi/?output=json&countrycode=IN&maxresults=1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v3",
+                "poi",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "output",
+                  "value": "json"
+                },
+                {
+                  "key": "countrycode",
+                  "value": "IN"
+                },
+                {
+                  "key": "maxresults",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "TC-14: Request with an invalid API key",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Invalid key is rejected (401/403)\", () => pm.expect([401, 403]).to.include(pm.response.code));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v3/poi/?output=json&countrycode=IN&maxresults=1&key=invalid-key-123",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v3",
+                "poi",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "output",
+                  "value": "json"
+                },
+                {
+                  "key": "countrycode",
+                  "value": "IN"
+                },
+                {
+                  "key": "maxresults",
+                  "value": "1"
+                },
+                {
+                  "key": "key",
+                  "value": "invalid-key-123"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "TC-15: Valid key sent in X-API-Key header instead of query",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));",
+                  "const body = pm.response.json();",
+                  "pm.test(\"Response is a non-empty array\", () => {",
+                  "  pm.expect(body).to.be.an(\"array\");",
+                  "  pm.expect(body.length).to.be.above(0);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "{{api_key}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/v3/poi/?output=json&countrycode=IN&maxresults=1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v3",
+                "poi",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "output",
+                  "value": "json"
+                },
+                {
+                  "key": "countrycode",
+                  "value": "IN"
+                },
+                {
+                  "key": "maxresults",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Negative",
+      "item": [
+        {
+          "name": "TC-16: maxresults=0",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Handled gracefully (200 or 400)\", () => pm.expect([200, 400]).to.include(pm.response.code));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v3/poi/?output=json&countrycode=IN&maxresults=0&key={{api_key}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v3",
+                "poi",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "output",
+                  "value": "json"
+                },
+                {
+                  "key": "countrycode",
+                  "value": "IN"
+                },
+                {
+                  "key": "maxresults",
+                  "value": "0"
+                },
+                {
+                  "key": "key",
+                  "value": "{{api_key}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "TC-17: maxresults=-1",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Handled gracefully (200 or 400)\", () => pm.expect([200, 400]).to.include(pm.response.code));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v3/poi/?output=json&countrycode=IN&maxresults=-1&key={{api_key}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v3",
+                "poi",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "output",
+                  "value": "json"
+                },
+                {
+                  "key": "countrycode",
+                  "value": "IN"
+                },
+                {
+                  "key": "maxresults",
+                  "value": "-1"
+                },
+                {
+                  "key": "key",
+                  "value": "{{api_key}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "TC-18: latitude=999 (out of range)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Invalid latitude rejected or returns no results\", () => {",
+                  "  if (pm.response.code === 200) pm.expect(pm.response.json().length).to.equal(0);",
+                  "  else pm.expect(pm.response.code).to.be.within(400, 499);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v3/poi/?output=json&latitude=999&longitude=77.5946&distance=10&key={{api_key}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v3",
+                "poi",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "output",
+                  "value": "json"
+                },
+                {
+                  "key": "latitude",
+                  "value": "999"
+                },
+                {
+                  "key": "longitude",
+                  "value": "77.5946"
+                },
+                {
+                  "key": "distance",
+                  "value": "10"
+                },
+                {
+                  "key": "key",
+                  "value": "{{api_key}}"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "TC-19: maxresults=abc (text instead of number)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Handled gracefully (200 or 400)\", () => pm.expect([200, 400]).to.include(pm.response.code));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v3/poi/?output=json&countrycode=IN&maxresults=abc&key={{api_key}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v3",
+                "poi",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "output",
+                  "value": "json"
+                },
+                {
+                  "key": "countrycode",
+                  "value": "IN"
+                },
+                {
+                  "key": "maxresults",
+                  "value": "abc"
+                },
+                {
+                  "key": "key",
+                  "value": "{{api_key}}"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

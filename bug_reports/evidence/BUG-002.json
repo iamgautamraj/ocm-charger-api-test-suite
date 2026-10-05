@@ -1,0 +1,138 @@
+{
+  "DataProvider": {
+    "WebsiteURL": "http://openchargemap.org",
+    "Comments": null,
+    "DataProviderStatusType": {
+      "IsProviderEnabled": true,
+      "ID": 1,
+      "Title": "Manual Data Entry"
+    },
+    "IsRestrictedEdit": false,
+    "IsOpenDataLicensed": true,
+    "IsApprovedImport": true,
+    "License": "Licensed under Creative Commons Attribution 4.0 International (CC BY 4.0)",
+    "DateLastImported": null,
+    "ID": 1,
+    "Title": "Open Charge Map Contributors"
+  },
+  "OperatorInfo": {
+    "WebsiteURL": null,
+    "Comments": null,
+    "PhonePrimaryContact": null,
+    "PhoneSecondaryContact": null,
+    "IsPrivateIndividual": null,
+    "AddressInfo": null,
+    "BookingURL": null,
+    "ContactEmail": null,
+    "FaultReportEmail": null,
+    "IsRestrictedEdit": null,
+    "ID": 1,
+    "Title": "(Unknown Operator)"
+  },
+  "UsageType": {
+    "IsPayAtLocation": false,
+    "IsMembershipRequired": true,
+    "IsAccessKeyRequired": true,
+    "ID": 4,
+    "Title": "Public - Membership Required"
+  },
+  "StatusType": {
+    "IsOperational": true,
+    "IsUserSelectable": true,
+    "ID": 50,
+    "Title": "Operational"
+  },
+  "SubmissionStatus": {
+    "IsLive": true,
+    "ID": 200,
+    "Title": "Submission Published"
+  },
+  "UserComments": null,
+  "PercentageSimilarity": null,
+  "MediaItems": null,
+  "IsRecentlyVerified": true,
+  "DateLastVerified": "2026-10-03T04:57:00Z",
+  "ID": 510821,
+  "UUID": "0DC86679-BF17-4212-8DCB-E7B865CC5C1B",
+  "ParentChargePointID": null,
+  "DataProviderID": 1,
+  "DataProvidersReference": null,
+  "OperatorID": 1,
+  "OperatorsReference": null,
+  "UsageTypeID": 4,
+  "UsageCost": null,
+  "AddressInfo": {
+    "ID": 511210,
+    "Title": "Nilkanth EV Charging Station - ChargeJet",
+    "AddressLine1": "Plot No. 5503/2 Vatva GIDC, cross Road, Phase IV, , Ahmedabad, Gujarat, 382445, India",
+    "AddressLine2": "Plot No. 5503/2 Vatva GIDC, cross Road, Phase IV, , Ahmedabad, Gujarat, 382445, India",
+    "Town": "Ahmedabad",
+    "StateOrProvince": "Gujarat",
+    "Postcode": "382445",
+    "CountryID": 106,
+    "Country": {
+      "ISOCode": "IN",
+      "ContinentCode": "AS",
+      "ID": 106,
+      "Title": "India"
+    },
+    "Latitude": 23.7593343,
+    "Longitude": 53.3224671,
+    "ContactTelephone1": null,
+    "ContactTelephone2": null,
+    "ContactEmail": null,
+    "AccessComments": null,
+    "RelatedURL": null,
+    "Distance": null,
+    "DistanceUnit": 0
+  },
+  "Connections": [
+    {
+      "ID": 880048,
+      "ConnectionTypeID": 0,
+      "ConnectionType": {
+        "FormalName": "Not Specified",
+        "IsDiscontinued": null,
+        "IsObsolete": null,
+        "ID": 0,
+        "Title": "Unknown"
+      },
+      "Reference": null,
+      "StatusTypeID": 50,
+      "StatusType": {
+        "IsOperational": true,
+        "IsUserSelectable": true,
+        "ID": 50,
+        "Title": "Operational"
+      },
+      "LevelID": 3,
+      "Level": {
+        "Comments": "40KW and Higher",
+        "IsFastChargeCapable": true,
+        "ID": 3,
+        "Title": "Level 3:  High (Over 40kW)"
+      },
+      "Amps": null,
+      "Voltage": null,
+      "PowerKW": 160,
+      "CurrentTypeID": 30,
+      "CurrentType": {
+        "Description": "Direct Current",
+        "ID": 30,
+        "Title": "DC"
+      },
+      "Quantity": 3,
+      "Comments": null
+    }
+  ],
+  "NumberOfPoints": 1,
+  "GeneralComments": null,
+  "DatePlanned": null,
+  "DateLastConfirmed": null,
+  "StatusTypeID": 50,
+  "DateLastStatusUpdate": "2026-10-03T04:57:00Z",
+  "MetadataValues": null,
+  "DataQualityLevel": 1,
+  "DateCreated": "2026-09-30T04:52:00Z",
+  "SubmissionStatusTypeID": 200
+}
